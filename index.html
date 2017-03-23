@@ -1,34 +1,404 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Paintscal | Beta</title>
-	    <meta name="author" content="Yonglin Wang">
-	    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-	    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-    </head>
-    <body>
-    	<div class="intro" style="position: fixed;" ><h1>Paintscal, Beta.</h1></div>
-        <canvas height="" id="hexmap"></canvas>
-	  	<footer>
-	  		<div class="alert">
-				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-				<span class="error-info">Yonglin is hot.</span>
-			</div>
-	  		<form action="" onsubmit="getFormData(); return false;">
-	  			<div class="num-input"><input type="number" name="mod" id="mod" min="1" placeholder="MOD" /></div>
-	  			<div class="num-input rows"><input type="number" name="rows" id="rows" max="60" min="1" placeholder="ROWS" /></div>
-	  			<br>
-	  			
-	  		</form>
-	  		<a class="btn btn-default btn-md" id="download">Download Triangle Image</a>
-	  		<div class="credit-container"><p class="credit">Crafted with </p> <div class="heart">❤</div> <p class="credit"> by <a href="//yonglinwang.net">Yonglin Wang</a></p></div>
-	  	</footer>
-	  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="js/colorFinder.js"></script>
-        <script src="js/render.js"></script>
-        <script type="text/javascript" src="js/ui.js"></script>
-    </body>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Passionate web designer, developer that wants to help you make your website a simply, better.">
+	<meta name="author" content="Yonglin Wang">
+	<meta name="theme-color" content="#ccc">
+	<link rel='shortcut icon' type='image/x-icon' href='img/favicon.ico' />
+	<title>Yonglin Wang | Markham based developer, designer</title>
+
+	<!-- Bootstrap Core CSS -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/morphext.css">
+    <!-- Custom font-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+</head>
+
+<body>
+    <div id="preload">
+       <img src="img/photos/1.jpg" alt="Image 01" />
+       <img src="img/photos/2.jpg" alt="Image 02" />
+       <img src="img/photos/4.jpg" alt="Image 03" />
+       <img src="img/photos/5.jpg" alt="Image 03" />
+       <img src="img/photos/6.jpg" alt="Image 03" />
+       <img src="img/photos/7.jpg" alt="Image 03" />
+    </div>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+        
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="navbar"><!-- navbar -->
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#yonglinNavigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar top-bar"></span>
+                    <span class="icon-bar middle-bar"></span>
+                    <span class="icon-bar bottom-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#top">Yonglin Wang</a>
+            </div><!-- /.mobile-menu -->
+            <div class="collapse navbar-collapse" id="yonglinNavigation">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="page-scroll" href="#introduction">About</a></li>
+                    <li><a class="page-scroll" href="portfolio">Portfolio</a></li>
+                    <li><a class="page-scroll" href="//blog.yonglinwang.net">Blog</a></li>
+                    <li><a class="page-scroll" href="contact">Contact me</a></li>
+                </ul>
+            </div><!-- /.right-menu -->
+        </div><!-- /.container -->
+    </nav><!-- /.navbar -->
+
+    <header id="top">
+        <div class="scroll-fade-out wow fadeIn"><h1>I am...</h1><br> <h2 id="namet"><a class="page-scroll" href = "#introduction"><span id="js-rotating">Yonglin,a student,a designer,a developer</span></a></h2></div>
+        <a class="scroll-fade-out page-scroll wow fadeIn" href="#introduction"><button class="btn btn-xl" style="margin-top:3em;">More About Me</button></a>   
+    </header>     
+    
+    <!-- Page Content -->
+    <div class="container intro">
+      <!-- Introduction Section-->
+        <section class="intro" id="introduction">
+            <div class="row">
+                <div class="col-lg-5 col-md-5 hidden-xs hidden-sm">
+                    <img class="img-centered img-profile" src="img/profile.jpg"><img>
+                </div>
+                <div class="col-lg-7 col-md-7 col-sm-12 intro-text">
+                    <h2>Hi There! I'm Yonglin</h2>
+                    <h4 class="emphasize-para"><b>Yonglin Wang</b>, 17 years old, grown up in cities on the Pacific Rim. Currently living in Markham. Enrolling in Unionville High School. Highly motivated creativive developer/designer with experiences in numerous projects.</h4>
+                    <span class="divider"></span>
+                    <p>I am an enthusiastic, delightful high school student, developed fantastic time and stress management skills during my time studying in China, and web design/development expertise trough years of learning and practicing. I am committed to discovering client business needs and building intuitive and efficient websites and applications to resolve them. Besides that, I am also committed to creating seductive graphics and designs.<p>
+                    <a class="page-scroll" href="portfolio"><button class="btn btn-xl" style="margin-top:20px;">See My work</button></a>
+                    <a href="stuff/resume-1.0.pdf"><button class="btn btn-xl" style="margin-top:20px;"><i class="fa fa-file-pdf-o fa-fw"></i> Download My Resume</button></a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container portfolio-cont"><!-- portfolio container -->
+        <section id="portfolio"><!-- portfolio content section -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Portfolio</h2>
+                    <h3 class="section-subheading text-muted">A glimpse at what I am commited to.</h3>
+                    <span class="divider-long"></span>
+                </div>
+            </div>
+            <div class="row text-center portfolio-array">
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/uhs-athletic-photos/main.jpg)">                                    
+                    <a href="portfolio/UHS-Athletics" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Unionville High School Athletics</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/spike-it-photos/main.jpg)" data-wow-delay="0.2s">
+                    <a href="portfolio/Spike-It-Volleyball" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Spike It Volleyball</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/metta-photos/main.jpg)" data-wow-delay="0.4s">
+                    <div class="portfolio-link disabled-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Metta Lifestyle</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/dots/main.jpg)" data-wow-delay="0.6s">
+                    <a href="portfolio/Dream-Of-The-Salesman" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Dream of the Salesman<br>(School Project)</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row text-center portfolio-array">
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/tricalc/main.jpg)" data-wow-delay="0.6s">
+                    <div class="portfolio-link disabled-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>CalcTri - a triangle solver<br>(School Project)</span>
+                            </div>
+                        </div>                            
+                    </div>
+                </div>
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/spaceship/main.jpg)" data-wow-delay="0.4s">
+                    <div class="portfolio-link">
+                        <a href="portfolio/Spaceship-Drawing">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Spaceship Perspective Drawing<br>(School Project)</span>
+                            </div>
+                        </div> 
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3 portfolio-item wow fadeInUp" style="background-image: url(img/hangman/main.jpg)" data-wow-delay="0.2s">
+                    <div class="portfolio-link disabled-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Just another Hangman Game in JAVA<br>(School Project)</span>
+                            </div>
+                        </div>                            
+                    </div>
+                </div>
+                <div class="col-md-3 portfolio-item wow fadeInUp" id="photos">
+                    <a href="portfolio/Photography" class="portfolio-link">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <span>Photography</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container service-cont">
+        <section id="service"><!-- Service Section -->
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Skill Sets</h2>
+                    <h3 class="section-subheading text-muted">Things I know how to do.</h3>
+                    <span class="divider-long"></span>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <span class="fa-stack fa-4x wow rotateIn" data-wow-delay="0.2s">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-camera-retro fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">1. Design</h4>
+                    <p class="text-muted">Design is intelligence made visible. With over 8 years of art experience and over 3 years of digital art involvement creating professional looking designs is just something I do. I ensure my designs are both visually intuitive and functionally accessible..</p>
+                </div>
+                <div class="col-md-6">
+                    <span class="fa-stack fa-4x wow rotateIn" data-wow-delay="0.4s">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-cubes fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">2. Develop</h4>
+                    <p class="text-muted">From scripting to object-oriented, from backend to front end. I develop software with efficiency and intuition in mind, combined with my skill in designing and art, I am able to create programs that are both reliable and user-friendly.</p>
+                </div>
+            </div>    
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <span class="fa-stack fa-4x wow rotateIn" data-wow-delay="0.2s">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-leaf fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">3. Leadership</h4>
+                    <p class="text-muted">Being able to create is one thing, but bing able to lead a team to create is another, I have the courage to take on great responsibility, to find the strength of my team, and to seek the weakness in order to do more.</p>
+                </div>    
+                <div class="col-md-6">
+                    <span class="fa-stack fa-4x wow rotateIn" data-wow-delay="0.3s">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">4. Multi-language</h4>
+                    <p class="text-muted">Having the ability to speak Mandarin and English naturally, I am able to communicate with a many people natively. Without the language barrier, I am able to establish more personal connections with my clients and people alike.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container quotes"> 
+        <section class="quotes-in" id="quotes">
+            <div class="row">
+                <div class="col-md-12 col-lg-12 text-center">
+                    <h2 class="section-heading">References</h2>
+                    <h3 class="section-subheading text-muted">Testimonials are enough to convince people for now.</h3>
+                </div>
+            </div>
+            <div class="row main">
+                <div id="cbp-qtrotator" class="cbp-qtrotator">
+                    <div class="cbp-qtcontent">
+                        <img class="hidden-sm hidden-xs" src="img/quote/1.jpg">
+                        <blockquote>
+                            <h3>Spike It Volleyball Camp</h3>
+                            <p>He is able to interpret my vision, my volleyball camp business, and my specific needs. He collaborates, advises, responds and suggests in a respectful and helpful manner. I have no doubt that he will be tremendously successful in this field.</p>
+                            <footerQuote>Ray Kong | Founder</footerQuote>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container intro">
+        <section class="reason" id="reason">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Experiences</h2>
+                    <h3 class="section-subheading text-muted">Humble yet mighty.</h3>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="img/about/1.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Late 2015</h4>
+                                <h4 class="subheading">Every end is a new beginning.</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">No one likes doing a minimum-wage job, neither did I. After half a year of "diligent" working at a Druxy's restaurant, I decided to call a quit on this physically and emotionally demainding job. I did so that I can have more time persuing my interests and to improve my academics.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="img/about/2.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>End of 2015</h4>
+                                <h4 class="subheading">The first step is always difficult.</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">One day, I saw a poster about school clothing design contest, I decided to take place in the challenge. So I created a "low poly wolf" from reference stock photos to represent the mascot of our school - a wolf. Regarding support, this project was a success, voted to be the top 2 designs by the students of our school. However, the design was declined due to its complexity. From this experience I learned that it is crucial to keep the designs simple.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>January 2016</h4>
+                                <h4 class="subheading">Let's do this, all over again.</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">After being declined, I decided to revamp my design and enter the Physical Education Uniform Deign contest. This time creating a graph that is smoother and more elegant. Without a doubt, my design was chosen to be printed on the new PhysEd Uniform. For more information about this project <a href="portfolio/UHS-Athletics">click me</a>.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>January 2016 - April 2016</h4>
+                                <h4 class="subheading">First Ever</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Out of nowhere came my first project - Spike It Volleyball Summer Camp rebranding. During this project, I understood how to find the most suitable solution for the client and the importance of it. For more information about this project <a href="portfolio/Spike-It-Volleyball">click me</a>.</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image">
+                            <img class="img-circle img-responsive" src="img/about/4.jpg" alt="">
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Febuary 2016 - present</h4>
+                                <h4 class="subheading">First ever, officially.</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">Here we go again. Another project out of nowhere. But this time, I am more prepared than ever. This project is about redesigning the image of the company, from a LOGO, wordmark to the postcards. EVERYTHING HAS TO CHANGE. I have never done so much thinking and sketching ever before. (This project is still ongoing. For more information about this project <a href="contact.html">click me</a>.)</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4 class="hidden-xs hidden-sm">BE PART
+                            <br>OF MY
+                            <br>STORY!</h4>
+                            <h1 class="hidden-lg hidden-xl hidden-md">...</h1>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+        
+    <footer><!-- Footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>THAT'S ALL THERE IS TO ME.</h2>
+                    <h3 class="section-subheading">Convinced? Leave your email.</h3>
+                    <div class="input-group col-xs-6">
+                        <input type="text" class="form-control transparent-input" placeholder="Your Email Address">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button">Lets Go!</button>
+                        </span>
+                    </div>
+                    <a data-toggle="collapse" href="#contactInfo" aria-expanded="false"><h3 class="section-subheading"><u>or contact me</u></h3></a>
+                    <ul class="list-group collapse.in" id="contactInfo">
+                        <li class="list-group-item">Cell Phone: (+1) 647-982-0729</li>
+                        <li class="list-group-item">Email: <a href="mailto:work@yonglinwang.net" class="lower-case">work@yonglinwang.net</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a class="linkedin" href="https://ca.linkedin.com/in/yonglinwang"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="https://github.com/callmekungfu"><i class="fa fa-github"></i></a></li>
+                        <li><a class="instagram" href="https://www.instagram.com/yonglin_wang/"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                    <ul class="list-group footer-menu">
+                        <li class="list-group-item"><a href="portfolio" class="portfolio-link">Portfolio</a></li>
+                        <li class="list-group-item"><a href="//blog.yonglinwang.net" class="portfolio-link">Blog</a></li>
+                        <li class="list-group-item"><a href="contact" class="portfolio-link">Contact Me</a></li>
+                        <li class="list-group-item"><a href="#" class="portfolio-link">简体</a> | <a href="#myModal" class="portfolio-link" data-toggle="modal">繁体</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+<!-- /.container -->
+
+<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="js/modernizr.custom.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/cbpAnimatedHeader.js"></script>
+<script src="js/jqBootstrapValidation.js"></script>
+<script src="js/jquery.cbpQTRotator.js"></script>
+<script src="js/morphext.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script src="js/homepage.js"></script> 
+</body>
+<!--Y u stil hear?-->
 </html>
