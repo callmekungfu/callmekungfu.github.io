@@ -341,6 +341,10 @@ h1.large {
     font-size: 50px;
 }
 
+.tk-essonnes-display{
+    font-family: 'Playfair Display', serif;
+}
+
 /*Button Style   ||-----------*/
 .btn:focus {
     outline: none;
